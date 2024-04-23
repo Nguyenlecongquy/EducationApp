@@ -3,6 +3,7 @@
     "name": "EducationApp",
     "slug": "EducationApp",
     "version": "1.0.0",
+    "scheme": "EducationApp",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -11,20 +12,35 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nguyenlecongquy.educationapp",
+      "infoPlist": {
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.174403152828-v56nlr8te7ileq1rnaja8jfljm1hoscd"
+            ]
+          }
+        ] 
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.nguyenlecongquy.educationapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "53303234-c2ba-47c8-81f3-ebd22e1e3ed8"
+      }
+    },
+    "plugins": ["@react-native-google-signin/google-signin"]
   }
 }
