@@ -1,18 +1,18 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
-import { Image, View, Text, Pressable } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { Image, View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
 import {
   GoogleSignin,
   GoogleSigninButton,
   statusCodes,
 } from "@react-native-google-signin/google-signin";
+import LocalStorage from "../storage/LocalStorage";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const image = require("../assets/login-image.png");
-  const [userInfo, setUserInfo] = useState(null);
-  const [accessToken, setAccessToken] = useState(null);
+  const { userData, setUserData } = useContext(AuthContext);
 
   const configureGoogleSignIn = () => {
     GoogleSignin.configure({
@@ -25,20 +25,6 @@ const Login = () => {
     });
   };
 
-  const getUserData = async (accessTokenValue) => {
-    try {
-      const response = await fetch(
-        "https://www.googleapis.com/userinfo/v2/me",
-        {
-          headers: {
-            Authorization: `Bearer ${accessTokenValue}`,
-          },
-        }
-      );
-      return response.json();
-    } catch (error) {}
-  };
-
   useEffect(() => {
     configureGoogleSignIn();
   }, []);
@@ -48,12 +34,8 @@ const Login = () => {
     try {
       await GoogleSignin.hasPlayServices();
       const result = await GoogleSignin.signIn();
-      console.log("userInfo", result);
-      //   const data = await GoogleSignin.getTokens();
-      console.log("token", data);
-    //   setAccessToken(data.accessToken);
-
-      setUserInfo(userInfo);
+      LocalStorage.setUserAuth(result);
+      setUserData(result);
     } catch (error) {
       switch (error.code) {
         case statusCodes.IN_PROGRESS:
@@ -69,17 +51,6 @@ const Login = () => {
           console.log("Something went wrong", error);
           break;
       }
-    }
-  };
-
-  const signOut = async () => {
-    console.log("pressed sign out");
-    try {
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
-      setUserInfo(null);
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -102,9 +73,6 @@ const Login = () => {
             onPress={signIn}
           />
         </View>
-        <Pressable onPress={signOut}>
-          <Text>Sign Out</Text>
-        </Pressable>
       </View>
 
       <StatusBar style="auto" />
