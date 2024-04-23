@@ -5,6 +5,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import LocalStorage from "../storage/LocalStorage";
 import { AuthContext } from "../context/AuthContext";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import WelcomeHeader from "../components/WelcomeHeader";
+import SearchBar from "../components/SearchBar";
 
 const Home = () => {
   const { userData, setUserData } = useContext(AuthContext);
@@ -38,9 +40,12 @@ const Home = () => {
 
   return (
     <SafeAreaView>
-      <Text>Home</Text>
+      <WelcomeHeader />
+
+      <SearchBar />
+
       <Pressable onPress={signOut}>
-        <Text>logout</Text>
+        <Text>log out</Text>
       </Pressable>
 
       <StatusBar style="auto" />

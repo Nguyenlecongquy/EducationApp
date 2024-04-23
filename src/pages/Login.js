@@ -12,7 +12,7 @@ import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
   const image = require("../assets/login-image.png");
-  const { userData, setUserData } = useContext(AuthContext);
+  const { setUserData } = useContext(AuthContext);
 
   const configureGoogleSignIn = () => {
     GoogleSignin.configure({
@@ -34,6 +34,7 @@ const Login = () => {
     try {
       await GoogleSignin.hasPlayServices();
       const result = await GoogleSignin.signIn();
+      console.log(result);
       LocalStorage.setUserAuth(result);
       setUserData(result);
     } catch (error) {
