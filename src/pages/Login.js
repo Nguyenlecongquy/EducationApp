@@ -16,12 +16,9 @@ const Login = () => {
 
   const configureGoogleSignIn = () => {
     GoogleSignin.configure({
-      webClientId:
-        "174403152828-8vra1prgjgnm5s3u5h49gdke1ifspdqp.apps.googleusercontent.com",
-      androidClientId:
-        "174403152828-78ol49k6sn8f1ecukapkbnp3ctmi3jcl.apps.googleusercontent.com",
-      iosClientId:
-        "174403152828-v56nlr8te7ileq1rnaja8jfljm1hoscd.apps.googleusercontent.com",
+      webClientId: process.env.EXPO_PUBLIC_WEB_CLIENT_ID,
+      androidClientId: process.env.EXPO_PUBLIC_ANDROID_CLIENT_ID,
+      iosClientId: process.env.EXPO_PUBLIC_IOS_CLIENT_ID,
     });
   };
 

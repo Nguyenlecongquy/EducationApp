@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 const WelcomeHeader = () => {
   const { userData } = useContext(AuthContext);
   return (
-    <View className="flex flex-row justify-between items-center mx-5 my-2">
+    <View className="flex flex-row justify-between items-center">
       <View>
         <Text>Hello</Text>
         <Text className="text-base font-bold">{userData.user.name}</Text>
