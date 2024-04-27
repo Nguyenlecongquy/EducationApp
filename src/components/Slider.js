@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, Image, Dimensions } from "react-native";
+import { View, FlatList, Image, Dimensions } from "react-native";
 import SliderApi from "../api/slider/SliderApi";
 
 const widthScreen = Dimensions.get("screen").width;
@@ -15,7 +15,6 @@ const Slider = () => {
         name: item.attributes.name,
         image: item.attributes.image.data.attributes.url,
       }));
-      console.log("list", list);
       setSlider(list);
     }
   };
@@ -29,6 +28,7 @@ const Slider = () => {
       <FlatList
         data={slider}
         horizontal={true}
+        showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
           <View>
             <Image
