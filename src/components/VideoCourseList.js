@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, Image } from "react-native";
 import VideoCourseListApi from "../api/videoCourseList/VideoCourseListApi";
+import { cn } from "../lib/utils";
 
 const VideoCourseList = () => {
   const [videoCourseList, setVideoCourseList] = useState([]);
@@ -24,15 +25,18 @@ const VideoCourseList = () => {
   }, []);
 
   return (
-    <View className='mt-3.5'>
-      <Text className='text-xl font-bold mb-0.5'>Video Courses</Text>
-      <FlatList 
+    <View className="mt-3.5">
+      <Text className="text-xl font-bold mb-0.5">Video Courses</Text>
+      <FlatList
         data={videoCourseList}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <View>
-            <Image source={{uri: item.image}} className='w-44 h-24 mr-2.5 rounded' />
+        renderItem={({ item, index }) => (
+          <View className={cn(index !== videoCourseList.length - 1 && "mr-2.5")}>
+            <Image
+              source={{ uri: item.image }}
+              className="w-44 h-24 rounded"
+            />
           </View>
         )}
       />

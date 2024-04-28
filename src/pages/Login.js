@@ -31,7 +31,6 @@ const Login = () => {
     try {
       await GoogleSignin.hasPlayServices();
       const result = await GoogleSignin.signIn();
-      console.log(result);
       LocalStorage.setUserAuth(result);
       setUserData(result);
     } catch (error) {

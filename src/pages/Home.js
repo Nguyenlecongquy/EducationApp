@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useContext, useState } from "react";
-import { Text, View, Pressable } from "react-native";
+import { Text, View, Pressable, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LocalStorage from "../storage/LocalStorage";
 import { AuthContext } from "../context/AuthContext";
@@ -9,6 +9,7 @@ import WelcomeHeader from "../components/WelcomeHeader";
 import SearchBar from "../components/SearchBar";
 import Slider from "../components/Slider";
 import VideoCourseList from "../components/VideoCourseList";
+import CourseList from "../components/CourseList";
 
 const Home = () => {
   const { userData, setUserData } = useContext(AuthContext);
@@ -38,15 +39,19 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView className="mx-[20px]">
-      <WelcomeHeader />
-      <SearchBar />
-      <Slider />
-      <VideoCourseList />
+    <SafeAreaView className="flex-1 px-5 bg-slate-200">
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <WelcomeHeader />
+        <SearchBar />
+        <Slider />
+        <VideoCourseList />
+        <CourseList type={"basic"} />
+        <CourseList type={"advance"} />
 
-      <Pressable onPress={signOut}>
-        <Text>log out</Text>
-      </Pressable>
+        <Pressable onPress={signOut}>
+          <Text>log out</Text>
+        </Pressable>
+      </ScrollView>
 
       <StatusBar style="auto" />
     </SafeAreaView>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, FlatList, Image, Dimensions } from "react-native";
+import { View, FlatList, Image, Dimensions, Text } from "react-native";
 import SliderApi from "../api/slider/SliderApi";
+import { cn } from "../lib/utils";
 
 const widthScreen = Dimensions.get("screen").width;
 
@@ -29,12 +30,15 @@ const Slider = () => {
         data={slider}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (
+        renderItem={({ item, index, length }) => (
           <View>
             <Image
               source={{ uri: item.image }}
               style={{ width: widthScreen - 40, height: widthScreen * 0.45 }}
-              className="rounded-xl mr-[20px] mt-3"
+              className={cn(
+                "rounded-xl mt-3",
+                index !== slider.length - 1 && "mr-3"
+              )}
             />
           </View>
         )}
