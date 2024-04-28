@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, FlatList, Image } from "react-native";
+import { Text, View, FlatList, Image, TouchableOpacity } from "react-native";
 import CourseListApi from "../api/courseList/CourseListApi";
 import { cn } from "../lib/utils";
+import { useNavigation } from "@react-navigation/native";
 
 const CourseList = ({ type }) => {
   const [courseList, setCourseList] = useState([]);
+  const navigation = useNavigation();
 
   const fetchCourseList = async () => {
     const result = await CourseListApi.getCourseList(type);
@@ -24,15 +26,30 @@ const CourseList = ({ type }) => {
     fetchCourseList();
   }, []);
 
+  const onNavigateCourseDetail = (course) => {
+    // console.log("course", course);
+    navigation.navigate("CourseDetail", {course: course})
+  };
+
   return (
     <View className="mt-3.5">
-      <Text className="text-xl font-bold mb-0.5 capitalize">{type} Courses</Text>
+      <Text className="text-xl font-bold mb-0.5 capitalize">
+        {type} Courses
+      </Text>
       <FlatList
         data={courseList}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item, index }) => (
-          <View className={cn("bg-white rounded", index !== courseList.length - 1 && "mr-2.5")}>
+          <TouchableOpacity
+            className={cn(
+              "bg-white rounded border border-border",
+              index !== courseList.length - 1 && "mr-2.5"
+            )}
+            onPress={() => {
+              onNavigateCourseDetail(item);
+            }}
+          >
             <Image
               source={{ uri: item.image }}
               className="w-44 h-24 rounded-t"
@@ -45,7 +62,7 @@ const CourseList = ({ type }) => {
                   : String(item.topic?.length) + " Lession"}
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>

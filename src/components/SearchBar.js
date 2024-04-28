@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 const SearchBar = () => {
   return (
-    <View className="flex flex-row bg-white p-2.5 rounded-xl mt-2.5 items-center shadow-sm shadow-gray-500">
+    <View className="flex flex-row bg-white rounded-xl items-center mt-2.5 p-2.5 border border-border">
       <Ionicons name="search" size={24} color="#979191" />
       <TextInput placeholder="Search" className="ml-2.5"/>
     </View>

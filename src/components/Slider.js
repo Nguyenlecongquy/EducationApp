@@ -4,6 +4,8 @@ import SliderApi from "../api/slider/SliderApi";
 import { cn } from "../lib/utils";
 
 const widthScreen = Dimensions.get("screen").width;
+const paddingHome = widthScreen * 0.04;
+const widthSlider = widthScreen - paddingHome * 2;
 
 const Slider = () => {
   const [slider, setSlider] = useState([]);
@@ -30,15 +32,17 @@ const Slider = () => {
         data={slider}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item, index, length }) => (
-          <View>
+        renderItem={({ item, index }) => (
+          <View
+            className={cn(
+              "rounded-xl  mt-3",
+              index !== slider.length - 1 && "mr-3"
+            )}
+          >
             <Image
               source={{ uri: item.image }}
-              style={{ width: widthScreen - 40, height: widthScreen * 0.45 }}
-              className={cn(
-                "rounded-xl mt-3",
-                index !== slider.length - 1 && "mr-3"
-              )}
+              style={{ width: widthSlider, height: widthSlider * 0.5 }}
+              className="rounded-xl"
             />
           </View>
         )}

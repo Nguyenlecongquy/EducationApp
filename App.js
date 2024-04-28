@@ -5,6 +5,8 @@ import Home from "./src/pages/Home";
 import { useState, useEffect, useMemo } from "react";
 import LocalStorage from "./src/storage/LocalStorage";
 import { AuthContext } from "./src/context/AuthContext";
+import HomeNavigation from "./src/navigation/HomeNavigation";
+import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
   const [userData, setUserData] = useState(null);
@@ -20,7 +22,13 @@ export default function App() {
     <View className="flex-1">
       <AuthContext.Provider value={{ userData, setUserData }}>
         <StatusBar style="auto" />
-        {userData ? <Home /> : <Login />}
+        {userData ? (
+          <NavigationContainer>
+            <HomeNavigation />
+          </NavigationContainer>
+        ) : (
+          <Login />
+        )}
       </AuthContext.Provider>
     </View>
   );

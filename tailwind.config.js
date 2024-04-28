@@ -14,6 +14,9 @@ module.exports = {
           DEFAULT: '#000000',
           black: '#000000'
         },
+        border: {
+          DEFAULT: '#e5e5e5'
+        },
       }
     },
 

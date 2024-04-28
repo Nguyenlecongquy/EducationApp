@@ -32,11 +32,13 @@ const VideoCourseList = () => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item, index }) => (
-          <View className={cn(index !== videoCourseList.length - 1 && "mr-2.5")}>
-            <Image
-              source={{ uri: item.image }}
-              className="w-44 h-24 rounded"
-            />
+          <View
+            className={cn(
+              "bg-white rounded border border-border",
+              index !== videoCourseList.length - 1 && "mr-2.5"
+            )}
+          >
+            <Image source={{ uri: item.image }} className="w-44 h-24 rounded" />
           </View>
         )}
       />
